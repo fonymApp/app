@@ -4,17 +4,188 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://fonymapp.github.io/app/index.html">
-<meta property="og:title" content="Fonym — Business card scanner for iPhone">
-<meta property="og:description" content="Scan the business cards you are handed and find them again in seconds. Works with no signal, no account and no subscription.">
+<title>Fonym — A better place for your business contacts</title>
+<meta name="description" content="A dedicated place on your iPhone for the people and businesses you deal with. Scan cards, find anyone fast, call in a tap. Works offline. Pay once: no ads, no subscriptions, no in-app purchases.">
+<meta property="og:title" content="Meet Fonym — A better place for your business contacts">
+<meta property="og:description" content="A dedicated place on your iPhone for the people and businesses you deal with — without the pile of paper cards, endless scrolling, or a monthly subscription.">
 <meta property="og:type" content="website">
-<title>Fonym — Business card scanner for iPhone</title>
-<meta name="description" content="Scan the business cards you are handed and find them again in seconds. Works with no signal, no account and no subscription. One payment, on the App Store.">
+<meta property="og:url" content="https://fonymapp.github.io/app/">
+<meta property="og:image" content="https://fonymapp.github.io/app/web/icon.png">
+<link rel="icon" type="image/png" href="web/icon.png">
+<link rel="apple-touch-icon" href="web/icon.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#F3EFE3;-webkit-font-smoothing:antialiased}
-  a{color:#0E6B76;text-decoration:none}
-  a:hover{color:#12707A}
+  :root{
+    --bg:#F3EFE3; --ink:#051E24; --text:#141A1C; --body:#3C4A4D; --muted:#5A6668;
+    --teal:#0E6B76; --teal-hover:#12707A; --mint:#5AD0C8;
+    --pill:#E3EEEE; --pill-ink:#0A4A52; --sand:#E9E4D6; --rule:#D9D3C4; --rule-strong:#C9C3B4;
+    --paper:#FBF9F2;
+    --frame:linear-gradient(152deg,#5c6265 0%,#191d1f 36%,#0d1011 100%);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Outfit,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:var(--teal);text-decoration:none}
+  a:hover{color:var(--teal-hover)}
+  img{max-width:100%}
+  h1,h2,h3,p{margin:0}
+  .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  .sec{margin-top:104px}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--teal)}
+  .rule-top{border-top:3px solid var(--ink);padding-top:22px}
+  .h2{font-size:clamp(28px,4vw,46px);font-weight:600;letter-spacing:-.03em;line-height:1.08;color:var(--ink);text-wrap:balance}
+  .lede{font-size:19px;font-weight:300;line-height:1.55;color:var(--body);text-wrap:pretty}
+  .badge{display:inline-flex}
+  .badge img{display:block;height:40px;width:auto}
+
+  /* Phone frame — same bezel as the original site */
+  .phone{width:100%;border-radius:44px;padding:7px;background:var(--frame);box-shadow:0 30px 70px rgba(5,30,36,.2)}
+  .phone .screen{border-radius:38px;overflow:hidden;background:#000;aspect-ratio:980/2121}
+  .phone img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+  .phone.sm{border-radius:34px;padding:5px;box-shadow:0 18px 44px rgba(5,30,36,.14)}
+  .phone.sm .screen{border-radius:29px}
+
+  /* Nav */
+  .nav{position:sticky;top:0;z-index:30;background:rgba(243,239,227,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(5,30,36,.09)}
+  .nav .wrap{padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:14px 24px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand img{width:30px;height:30px;border-radius:7px;display:block}
+  .wordmark{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;letter-spacing:.24em;color:var(--teal)}
+  .nav .badge img{height:38px;width:auto}
+
+  /* Hero */
+  .hero{padding-top:56px;display:flex;flex-wrap:wrap;gap:40px 56px;align-items:flex-start}
+  .hero-copy{flex:1 1 420px;min-width:0}
+  .meet{display:flex;align-items:center;gap:18px}
+  .app-icon{width:76px;height:76px;border-radius:17px;display:block;box-shadow:0 10px 26px rgba(14,107,118,.28)}
+  .meet-name{font-size:28px;font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1.1;margin-top:4px}
+  .hero h1{margin-top:30px;font-size:clamp(42px,6.6vw,80px);font-weight:700;letter-spacing:-.04em;line-height:.98;color:var(--ink);text-wrap:balance}
+  .hero .lead{margin-top:26px;font-size:clamp(19px,2.1vw,24px);font-weight:300;line-height:1.42;color:var(--body);max-width:32em;text-wrap:pretty}
+  .cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:36px}
+  .cta-note{font-size:16px;color:var(--muted)}
+  .pills{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+  .pills li{font-size:15px;font-weight:500;padding:9px 16px;border-radius:999px;background:var(--pill);color:var(--pill-ink)}
+  .hero-shot{flex:0 1 330px;min-width:0;margin:0 auto;max-width:330px;width:100%}
+  .hero-phone{display:block;width:100%;height:auto;filter:drop-shadow(0 28px 40px rgba(5,30,36,.22))}
+  /* Show the upper part of the screen; the phone runs off the bottom of the hero */
+
+  /* "A place of their own" + thought bubble */
+  .own-grid{display:flex;flex-wrap:wrap;gap:40px 64px;align-items:center;margin-top:44px}
+  .own-copy{flex:1 1 360px;min-width:0}
+    .thought{flex:1 1 440px;min-width:0;position:relative}
+  .tail{display:flex;align-items:flex-end;gap:14px;margin-top:8px;padding-left:clamp(0px,6vw,64px)}
+  .tail .kicker{font-size:19px;font-weight:300;line-height:1.4;color:var(--body);margin-bottom:-1px}
+  .dots{position:relative;flex:none;width:64px;height:62px}
+  .bubble{position:relative;background:var(--paper);border:2px solid var(--ink);border-radius:46px;padding:clamp(28px,4vw,44px) clamp(26px,4vw,46px);box-shadow:10px 10px 0 var(--pill)}
+  .bubble-text{font-size:clamp(25px,3.3vw,40px);font-weight:600;letter-spacing:-.025em;line-height:1.16;color:var(--ink);min-height:3.5em}
+  .bubble-text em{font-style:italic;font-weight:800}
+  .roll{color:var(--teal);white-space:nowrap}
+  .caret{display:inline-block;width:3px;height:.9em;margin-left:2px;background:var(--teal);vertical-align:-.08em;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0} }
+  .dot{position:absolute;background:var(--paper);border:2px solid var(--ink);border-radius:50%}
+  .dot.d1{width:30px;height:30px;left:24px;bottom:28px}
+  .dot.d2{width:16px;height:16px;left:0;bottom:6px}
+  .own-more{display:flex;flex-wrap:wrap;gap:24px 64px;margin-top:40px}
+  .own-more > *{flex:1 1 340px;min-width:0}
+  .pull{font-size:clamp(22px,2.6vw,30px);font-weight:500;letter-spacing:-.02em;line-height:1.25;color:var(--ink);border-left:4px solid var(--mint);padding-left:20px;text-wrap:balance}
+
+  .who{margin-top:56px;border-top:2px solid var(--rule-strong);padding-top:20px}
+  .who-list{list-style:none;margin:18px 0 0;padding:0;font-size:clamp(19px,2.2vw,24px);font-weight:500;letter-spacing:-.01em;line-height:1.7;color:var(--ink)}
+  .who-list li{display:inline-block}
+  .who-list li:not(:last-child)::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mint);margin:0 .6em;vertical-align:.2em}
+
+  /* How to use it */
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:36px 32px;margin-top:44px}
+  .shot{max-width:300px;width:100%;margin:0 auto}
+  .panel{display:block;width:100%;height:auto;border-radius:26px;box-shadow:0 18px 44px rgba(5,30,36,.16)}
+  .band .panel{box-shadow:0 24px 60px rgba(0,0,0,.35)}
+  .howto{margin:0;display:flex;flex-direction:column;border-top:2px solid var(--rule-strong);padding-top:18px}
+  .howto-title{font-size:clamp(22px,2.3vw,27px);font-weight:700;letter-spacing:-.03em;line-height:1.12;color:var(--ink);text-wrap:balance}
+  .howto-title .accent{color:var(--teal)}
+  .howto-sub{margin-top:10px;font-size:16px;font-weight:300;line-height:1.5;color:var(--body);text-wrap:pretty;min-height:3em}
+  .howto picture{display:block;margin-top:auto;padding-top:26px}
+  .howto-phone{display:block;width:100%;height:auto;filter:drop-shadow(0 22px 34px rgba(5,30,36,.18))}
+  .shot-title{margin-top:16px;font-size:17.5px;font-weight:600;color:var(--ink)}
+  .shot-sub{margin-top:4px;font-size:15.5px;line-height:1.45;color:var(--muted)}
+  .collect{display:flex;flex-wrap:wrap;gap:32px 64px;margin-top:64px;align-items:flex-start}
+  .collect > *{flex:1 1 380px;min-width:0}
+  .collect h3{font-size:clamp(22px,2.4vw,28px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+  .ways{list-style:none;margin:14px 0 0;padding:0}
+  .ways li{display:flex;gap:16px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--rule);font-size:19px;font-weight:500;color:var(--ink)}
+  .ways li::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+
+  /* Dark band (sharing, closing) */
+  .band{background:var(--ink);color:var(--bg)}
+  .band .eyebrow{color:var(--mint)}
+  .share-grid{display:flex;flex-wrap:wrap;gap:56px;align-items:center;margin-top:24px}
+  .share-copy{flex:1 1 400px;min-width:0}
+  .share-copy h2{font-size:clamp(32px,4.6vw,58px);font-weight:700;letter-spacing:-.035em;line-height:1.02;text-wrap:balance}
+  .share-copy p{margin-top:22px;font-size:19.5px;font-weight:300;line-height:1.55;color:rgba(243,239,227,.82);max-width:34em;text-wrap:pretty}
+  .share-copy .aside{font-style:italic;color:var(--bg);font-weight:400}
+  .tip{margin-top:34px;max-width:34em;border:1px solid rgba(90,208,200,.4);border-left:4px solid var(--mint);padding:16px 20px 18px;background:rgba(90,208,200,.06)}
+  .tip .eyebrow{font-size:11px}
+  .tip p{margin-top:8px;font-size:18px;font-style:italic;font-weight:300;line-height:1.5;color:rgba(243,239,227,.92)}
+  .share-shot{flex:0 1 300px;min-width:0;max-width:300px;width:100%;margin:0 auto}
+  .share-phone{display:block;width:100%;height:auto;filter:drop-shadow(0 26px 44px rgba(0,0,0,.45))}
+
+  /* Privacy */
+  .priv-grid{display:flex;flex-wrap:wrap;gap:40px 64px;align-items:flex-start;margin-top:26px}
+  .priv-copy{flex:1 1 440px;min-width:0}
+  .priv-copy p{font-size:18.5px;font-weight:300;line-height:1.6;color:var(--body);max-width:36em;text-wrap:pretty}
+  .priv-copy p + p{margin-top:16px}
+  .priv-copy strong{font-weight:500;color:var(--ink)}
+  .priv-copy b{font-weight:700;color:var(--ink)}
+
+  /* Pay once */
+  .pay{background:var(--teal);color:var(--bg);padding:clamp(32px,5vw,56px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:32px}
+  .pay .eyebrow{color:rgba(243,239,227,.7)}
+  .pay-big{margin-top:14px;font-size:clamp(46px,7vw,82px);font-weight:800;letter-spacing:-.045em;line-height:.94}
+  .pay-big span{font-weight:300;font-style:italic;letter-spacing:-.03em}
+  .pay-nos{margin-top:16px;font-size:clamp(18px,2.2vw,24px);font-weight:400;letter-spacing:-.01em;color:rgba(243,239,227,.92)}
+  .pay-body{max-width:30em;min-width:0}
+  .pay-body p{font-size:17.5px;line-height:1.55;color:rgba(243,239,227,.92);text-wrap:pretty}
+  .pay-body .badge{margin-top:24px}
+
+  /* Features */
+  .features{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:2px 56px}
+  .features li{padding:14px 0;border-bottom:1px solid var(--rule);font-size:17.5px;line-height:1.45;color:var(--body);display:flex;gap:14px;align-items:baseline}
+  .features li::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--teal);transform:translateY(-1px)}
+
+  /* Closing */
+  .band.closing{background:var(--teal)}
+  .closing .wrap{padding-top:80px;padding-bottom:72px}
+  .closing h2{font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-.035em;line-height:1.02;max-width:16em;text-wrap:balance}
+  .closing-lines{margin-top:28px;font-size:clamp(19px,2.2vw,24px);font-weight:300;line-height:1.5;color:rgba(243,239,227,.82);max-width:34em}
+  .closing-lines p + p{margin-top:10px}
+  .closing-lines .they{color:var(--bg);font-weight:600}
+  .they-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:28px}
+  .foot{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:56px;padding-top:26px;border-top:1px solid rgba(243,239,227,.25);font-size:15.5px;color:rgba(243,239,227,.75)}
+  .foot a{color:var(--bg);text-decoration:underline;text-decoration-color:rgba(243,239,227,.4);text-underline-offset:3px}
+  .foot a:hover{color:#fff}
+  .foot .copy{margin-left:auto}
+
+  @media (max-width:560px){
+    .sec{margin-top:80px}
+    .hero{padding-top:36px}
+    .app-icon{width:62px;height:62px;border-radius:14px}
+    .meet-name{font-size:24px}
+    .foot .copy{margin-left:0}
+    .tail{padding-left:0;gap:10px}
+    .tail .kicker{font-size:16px;white-space:nowrap}
+    .dots{width:56px}
+    .shots{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin:36px -24px 0;padding:0 24px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .shots::-webkit-scrollbar{display:none}
+    .shot{flex:0 0 74%;max-width:none;margin:0;scroll-snap-align:center}
+    .share-shot{max-width:260px}
+    .hero-shot{max-width:300px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .caret{animation:none}
+  }
 </style>
 <template id="__bundler_thumbnail" data-bg-color="#0E6B76">
 <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
@@ -29,235 +200,261 @@
 </template>
 </head>
 <body>
-<div style="font-family:Outfit,system-ui,sans-serif;color:#141A1C;background:#F3EFE3">
 
-  <div style="position:sticky;top:0;z-index:30;background:rgba(243,239,227,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(5,30,36,.09)">
-    <div style="max-width:1120px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap">
-      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;letter-spacing:.24em;color:#0E6B76">FONYM</div>
-        <div style="font-size:14.5px;font-weight:400;color:#5A6668">Business card scanner for iPhone</div>
-      </div>
-      <a href="https://apps.apple.com/us/app/fonym-business-card-scanner/id6809056277" style="display:inline-flex;border-bottom:none"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download Fonym on the App Store" style="display:block;height:38px;width:auto"></a>
+<!-- ============================================================ NAV -->
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="web/icon.png" alt="" width="30" height="30">
+      <span class="wordmark">FONYM</span>
     </div>
+    <a class="badge" href="https://apps.apple.com/us/app/fonym-business-card-scanner/id6809056277"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download Fonym on the App Store" width="120" height="40"></a>
   </div>
+</header>
 
-  <div style="max-width:1120px;margin:0 auto;padding:56px 24px 0">
-    <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
-      <div style="flex:1 1 400px;min-width:0">
+<main>
 
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.2em;color:#0E6B76">THE PAPER CARD, SOLVED</div>
-        <h1 style="margin:22px 0 0;font-size:clamp(46px,7.2vw,86px);font-weight:700;letter-spacing:-.04em;line-height:.97;color:#051E24;text-wrap:balance">Your cards,<br>always on you.</h1>
-
-        <p style="margin:26px 0 0;font-size:clamp(19px,2.2vw,25px);font-weight:300;line-height:1.42;color:#3C4A4D;max-width:32em;text-wrap:pretty">Scan the cards you are handed and they stay with you &mdash; searchable in seconds, months later. No more dog-eared corners, no more cards through the wash, no more piles on the bench.</p>
-        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 22px;margin-top:38px">
-          <a href="https://apps.apple.com/us/app/fonym-business-card-scanner/id6809056277" style="display:inline-flex;border-bottom:none"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download Fonym on the App Store" style="display:block;height:40px;width:auto"></a>
-          <div style="font-size:16px;font-weight:400;color:#5A6668">One payment. No subscription, no ads, no account.</div>
-        </div>
-
-        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:40px">
-          <span style="font-size:15px;font-weight:500;padding:9px 16px;border-radius:999px;background:#E3EEEE;color:#0A4A52">Works with no signal</span>
-          <span style="font-size:15px;font-weight:500;padding:9px 16px;border-radius:999px;background:#E3EEEE;color:#0A4A52">No account</span>
-          <span style="font-size:15px;font-weight:500;padding:9px 16px;border-radius:999px;background:#E3EEEE;color:#0A4A52">No ads, ever</span>
-          <span style="font-size:15px;font-weight:500;padding:9px 16px;border-radius:999px;background:#E3EEEE;color:#0A4A52">Nothing on a server</span>
-        </div>
-      </div>
-
-      <div style="flex:0 1 330px;min-width:0;display:flex;justify-content:center;margin:0 auto">
-        <div style="width:100%;max-width:330px;border-radius:44px;padding:7px;box-sizing:border-box;background:linear-gradient(152deg,#5c6265 0%,#191d1f 36%,#0d1011 100%);box-shadow:0 30px 70px rgba(5,30,36,.2)">
-          <div style="border-radius:38px;overflow:hidden;background:#000;aspect-ratio:980/2121">
-            <img src="web/01.jpg" alt="Fonym scanning a business card" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top center">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div style="max-width:1120px;margin:96px auto 0;padding:0 24px">
-    <div style="border-top:3px solid #051E24;padding-top:22px">
-      <h2 style="margin:0;font-size:clamp(28px,4vw,46px);font-weight:600;letter-spacing:-.03em;line-height:1.08;color:#051E24;max-width:22em;text-wrap:balance">Someone hands you a card. Weeks later, you need to reach that person.</h2>
-      <p style="margin:20px 0 0;font-size:19px;font-weight:300;line-height:1.55;color:#3C4A4D;max-width:40em;text-wrap:pretty">By then the card is in a drawer, a jacket pocket, a pile on the bench you would swear you had sorted. Fonym keeps the cards you collect and lets you search them when that moment comes &mdash; and it works without Internet, because everything happens on your phone.</p>
-    </div>
-  </div>
-
-  <div style="max-width:1120px;margin:64px auto 0;padding:0 24px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:34px">
-      <div style="border-top:2px solid #C9C3B4;padding-top:18px">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.16em;color:#7A8384">01</div>
-        <div style="margin-top:10px;font-size:26px;font-weight:600;letter-spacing:-.02em;color:#051E24;line-height:1.14">Never lose one again</div>
-        <p style="margin:12px 0 0;font-size:16.5px;line-height:1.56;color:#3C4A4D;text-wrap:pretty">Six ways in, the back of the card included. Then tags, favorites, search across every field, and four ways to sort. No cap on how many you keep.</p>
-      </div>
-      <div style="border-top:2px solid #C9C3B4;padding-top:18px">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.16em;color:#7A8384">02</div>
-        <div style="margin-top:10px;font-size:26px;font-weight:600;letter-spacing:-.02em;color:#051E24;line-height:1.14">No account. No server.</div>
-        <p style="margin:12px 0 0;font-size:16.5px;line-height:1.56;color:#3C4A4D;text-wrap:pretty">Reading the text on a card happens on your phone. There is nothing to sign up for. Nothing leaves your device on its own &mdash; only what you share or back up yourself.</p>
-      </div>
-      <div style="border-top:2px solid #C9C3B4;padding-top:18px">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.16em;color:#7A8384">03</div>
-        <div style="margin-top:10px;font-size:26px;font-weight:600;letter-spacing:-.02em;color:#051E24;line-height:1.14">Pay once. That&rsquo;s all of it.</div>
-        <p style="margin:12px 0 0;font-size:16.5px;line-height:1.56;color:#3C4A4D;text-wrap:pretty">One payment. No subscription, no in-app purchases, no ads, and nothing waiting behind a second payment later.</p>
-      </div>
-    </div>
-  </div>
-
-  <div style="max-width:1120px;margin:96px auto 0;padding:0 24px">
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.2em;color:#0E6B76">A LOOK AT THE APP</div>
-      <a href="https://apps.apple.com/us/app/fonym-business-card-scanner/id6809056277" style="font-size:16.5px;font-weight:500;border-bottom:1px solid rgba(14,107,118,.4);padding-bottom:2px">See it on the App Store</a>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:34px 26px;margin-top:30px">
+<!-- ============================================================ HERO -->
+<section class="wrap hero">
+  <div class="hero-copy">
+    <div class="meet">
+      <img class="app-icon" src="web/icon.png" alt="Fonym app icon" width="76" height="76">
       <div>
-        <div style="border-radius:34px;padding:5px;background:linear-gradient(152deg,#5c6265 0%,#191d1f 36%,#0d1011 100%);box-shadow:0 18px 44px rgba(5,30,36,.14)">
-          <div style="border-radius:29px;overflow:hidden;background:#000;aspect-ratio:980/2121">
-            <img src="web/01.jpg" alt="Scanning a business card with the camera" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top center">
-          </div>
-        </div>
-        <div style="margin-top:14px;font-size:16.5px;font-weight:500;color:#051E24">Scan it with the camera</div>
-        <div style="margin-top:4px;font-size:15.5px;line-height:1.45;color:#5A6668">Or a QR code, a photo, a vCard, pasted text, or by hand.</div>
-      </div>
-      <div>
-        <div style="border-radius:34px;padding:5px;background:linear-gradient(152deg,#5c6265 0%,#191d1f 36%,#0d1011 100%);box-shadow:0 18px 44px rgba(5,30,36,.14)">
-          <div style="border-radius:29px;overflow:hidden;background:#000;aspect-ratio:980/2121">
-            <img src="web/02.jpg" alt="Reviewing and correcting each field before saving" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top center">
-          </div>
-        </div>
-        <div style="margin-top:14px;font-size:16.5px;font-weight:500;color:#051E24">Check it before it saves</div>
-        <div style="margin-top:4px;font-size:15.5px;line-height:1.45;color:#5A6668">Every field is yours to correct, so the records stay clean.</div>
-      </div>
-      <div>
-        <div style="border-radius:34px;padding:5px;background:linear-gradient(152deg,#5c6265 0%,#191d1f 36%,#0d1011 100%);box-shadow:0 18px 44px rgba(5,30,36,.14)">
-          <div style="border-radius:29px;overflow:hidden;background:#000;aspect-ratio:980/2121">
-            <img src="web/04.jpg" alt="Searching and sorting the card book" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top center">
-          </div>
-        </div>
-        <div style="margin-top:14px;font-size:16.5px;font-weight:500;color:#051E24">Find it months later</div>
-        <div style="margin-top:4px;font-size:15.5px;line-height:1.45;color:#5A6668">Search every field, filter by tag, sort four ways.</div>
-      </div>
-      <div>
-        <div style="border-radius:34px;padding:5px;background:linear-gradient(152deg,#5c6265 0%,#191d1f 36%,#0d1011 100%);box-shadow:0 18px 44px rgba(5,30,36,.14)">
-          <div style="border-radius:29px;overflow:hidden;background:#000;aspect-ratio:980/2121">
-            <img src="web/05.jpg" alt="A saved contact with call, text and email actions" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top center">
-          </div>
-        </div>
-        <div style="margin-top:14px;font-size:16.5px;font-weight:500;color:#051E24">Reach them in a tap</div>
-        <div style="margin-top:4px;font-size:15.5px;line-height:1.45;color:#5A6668">Call, text or email, with your notes and the card photo kept.</div>
+        <div class="eyebrow">Fonym</div>
+        <div class="meet-name">The paper card, solved</div>
       </div>
     </div>
+    <h1>A better place for your business contacts.</h1>
+    <p class="lead">Finally, a dedicated place for the people and businesses you deal with &mdash; without the pile of paper cards, the endless scrolling, or a monthly subscription.</p>
+    <div class="cta">
+      <a class="badge" href="https://apps.apple.com/us/app/fonym-business-card-scanner/id6809056277"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download Fonym on the App Store" width="120" height="40"></a>
+      <ul class="pills">
+        <li>No ads</li>
+        <li>No subscriptions</li>
+        <li>No in-app purchases</li>
+      </ul>
+    </div>
   </div>
+  <div class="hero-shot">
+    <picture>
+      <source srcset="web/hero-phone.webp" type="image/webp">
+      <img class="hero-phone" src="web/hero-phone.png" width="620" height="1282" alt="Fonym's Home screen on iPhone: Store a card, Share my card, Card Book and My Cards">
+    </picture>
+  </div>
+</section>
 
-  <div style="background:#051E24;color:#F3EFE3;margin-top:104px">
-    <div style="max-width:1120px;margin:0 auto;padding:88px 24px">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.2em;color:#5AD0C8">SHARING YOUR OWN CARD</div>
-      <div style="display:flex;flex-wrap:wrap;gap:56px;align-items:center;margin-top:24px">
-        <div style="flex:1 1 380px;min-width:0">
-          <h2 style="margin:0;font-size:clamp(32px,4.6vw,58px);font-weight:700;letter-spacing:-.035em;line-height:1.02;text-wrap:balance">The code <span style="font-weight:300;font-style:italic">is</span> the card.</h2>
-          <p style="margin:24px 0 0;font-size:19.5px;font-weight:300;line-height:1.55;color:rgba(243,239,227,.82);max-width:34em;text-wrap:pretty">Your QR code carries the contact itself, not a link to fetch one. Phones read it with their built-in camera app, with no app required on their end &mdash; so there is nothing to load and nothing to look up online. It works even when neither phone has a connection.</p>
-          <p style="margin:20px 0 0;font-size:19.5px;font-weight:300;line-height:1.55;color:rgba(243,239,227,.82);max-width:34em;text-wrap:pretty">And the people you exchange cards with never hear from us. No invitations, no follow-up emails. They get your contact details, and that is all.</p>
+<!-- ============================================================ A PLACE OF THEIR OWN -->
+<section class="wrap sec">
+  <div class="rule-top">
+    <div class="own-grid">
+      <div class="own-copy">
+        <h2 class="h2">Fonym gives your business contacts a place of their own.</h2>
+      </div>
+      <div class="thought">
+        <p class="sr">&ldquo;I know I saved that contractor&rsquo;s number somewhere&hellip;&rdquo;</p>
+        <div class="bubble" aria-hidden="true">
+          <div class="bubble-text">&ldquo;I <em>know</em> I saved that <span class="roll"><span id="roll">plumber</span><span class="caret"></span></span>&rsquo;s number somewhere&hellip;&rdquo;</div>
         </div>
-        <div style="flex:0 1 300px;min-width:0;display:flex;justify-content:center;margin:0 auto">
-          <div style="width:100%;max-width:300px;border-radius:44px;padding:7px;box-sizing:border-box;background:linear-gradient(152deg,#5c6265 0%,#191d1f 36%,#0d1011 100%)">
-            <div style="border-radius:38px;overflow:hidden;background:#000;aspect-ratio:980/2121">
-              <img src="web/03.jpg" alt="Fonym showing a shareable QR code" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top center">
-            </div>
-          </div>
+        <div class="tail">
+          <p class="kicker">For anyone who has ever thought:</p>
+          <span class="dots" aria-hidden="true"><span class="dot d2"></span><span class="dot d1"></span></span>
         </div>
       </div>
     </div>
-  </div>
-
-  <div style="max-width:1120px;margin:96px auto 0;padding:0 24px">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.2em;color:#0E6B76">SIX WAYS TO SAVE A CARD</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:2px 28px;margin-top:22px">
-      <div style="padding:16px 0;border-bottom:1px solid #D9D3C4;font-size:19px;font-weight:500;color:#051E24">Scan with the camera</div>
-      <div style="padding:16px 0;border-bottom:1px solid #D9D3C4;font-size:19px;font-weight:500;color:#051E24">Scan a QR code</div>
-      <div style="padding:16px 0;border-bottom:1px solid #D9D3C4;font-size:19px;font-weight:500;color:#051E24">Import a photo</div>
-      <div style="padding:16px 0;border-bottom:1px solid #D9D3C4;font-size:19px;font-weight:500;color:#051E24">Open a vCard file</div>
-      <div style="padding:16px 0;border-bottom:1px solid #D9D3C4;font-size:19px;font-weight:500;color:#051E24">Paste copied text</div>
-      <div style="padding:16px 0;border-bottom:1px solid #D9D3C4;font-size:19px;font-weight:500;color:#051E24">Type it in yourself</div>
+    <div class="own-more">
+      <p class="lede">Fonym keeps those contacts organized, searchable, and separate from your everyday address book. Call, text or email anyone in a tap.</p>
+      <p class="pull">Keep the people you do business with separate from the people you do life with.</p>
     </div>
-    <p style="margin:22px 0 0;font-size:17px;line-height:1.55;color:#3C4A4D;max-width:44em;text-wrap:pretty">However it arrives, you review and correct every field before it saves, so your records stay clean. Capture the back of the card into the same contact, keep the card photo alongside the details, and add your own notes.</p>
   </div>
 
-  <div style="max-width:1120px;margin:96px auto 0;padding:0 24px">
-    <div style="border-top:3px solid #051E24;padding-top:22px">
-      <h2 style="margin:0;font-size:clamp(26px,3.4vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.1;color:#051E24">Who it is for</h2>
-      <p style="margin:18px 0 0;font-size:18.5px;font-weight:300;line-height:1.55;color:#3C4A4D;max-width:42em;text-wrap:pretty">People whose pockets fill up with cards, who cannot afford to lose one, and who need to reach a contact wherever they happen to be.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:26px;margin-top:34px">
-        <div style="background:#E9E4D6;padding:22px 22px 24px">
-          <div style="font-size:20px;font-weight:600;color:#051E24">Trades and contractors</div>
-          <p style="margin:9px 0 0;font-size:16px;line-height:1.5;color:#3C4A4D">Electricians, plumbers, HVAC, builders. Every supplier, sub and rep, tagged and findable from a crawlspace.</p>
+  <div class="who">
+    <div class="eyebrow">Made for the cards you actually collect</div>
+    <ul class="who-list">
+      <li>Electricians</li><li>Plumbers</li><li>Contractors</li><li>Builders</li><li>Mechanics</li><li>Body shops</li><li>Dealers</li><li>Hairdressers</li><li>Pet groomers</li><li>Cleaners</li><li>Home services</li><li>Real estate agents</li><li>Caterers</li><li>Vendors</li><li>Physicians</li><li>Dentists</li><li>Executive assistants</li><li>Personal assistants</li><li>Office managers</li><li>Practice managers</li><li>Receptionists</li><li>Secretaries</li><li>Salespeople</li><li>Conference and trade-show attendees</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================ HOW TO USE IT -->
+<section class="wrap sec">
+  <div class="eyebrow">How to use it</div>
+  <h2 class="h2" style="margin-top:16px;max-width:20em">Your phone book shouldn&rsquo;t have to be your business card drawer.</h2>
+
+  <div class="shots">
+    <figure class="shot howto">
+      <figcaption>
+        <h3 class="howto-title">Meet <span class="accent">Fonym</span></h3>
+        <p class="howto-sub">Your business contacts, finally in their own place.</p>
+      </figcaption>
+      <picture>
+        <source srcset="web/howto-phone-01.webp" type="image/webp">
+        <img class="howto-phone" src="web/howto-phone-01.png" width="560" height="1157" loading="lazy" alt="Fonym's Card Book on iPhone: a searchable list of saved business contacts">
+      </picture>
+    </figure>
+    <figure class="shot howto">
+      <figcaption>
+        <h3 class="howto-title">Everything you need, <span class="accent">together</span></h3>
+        <p class="howto-sub">Keep contact information, tags, social handles, and your own notes.</p>
+      </figcaption>
+      <picture>
+        <source srcset="web/howto-phone-02.webp" type="image/webp">
+        <img class="howto-phone" src="web/howto-phone-02.png" width="560" height="1157" loading="lazy" alt="Adding a new card in Fonym: name, title, company and phone fields, each editable">
+      </picture>
+    </figure>
+    <figure class="shot howto">
+      <figcaption>
+        <h3 class="howto-title">Reach them <span class="accent">in one tap</span></h3>
+        <p class="howto-sub">Call, text, email or open their website &mdash; straight from the card.</p>
+      </figcaption>
+      <picture>
+        <source srcset="web/howto-phone-03.webp" type="image/webp">
+        <img class="howto-phone" src="web/howto-phone-03.png" width="560" height="1157" loading="lazy" alt="A saved contact in Fonym with call, text, email, website and Instagram buttons, notes and the card photo">
+      </picture>
+    </figure>
+  </div>
+
+  <div class="collect">
+    <div>
+      <h3>Collect your contacts in many ways</h3>
+      <ul class="ways">
+        <li>Scan cards or QR codes with your camera</li>
+        <li>Import vCard files or screenshots of message apps</li>
+        <li>Copied text from clipboard</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Keep more than basic contact information</h3>
+      <ul class="ways">
+        <li>Store photos of the business card</li>
+        <li>Social media handles</li>
+        <li>Your own notes, and more!</li>
+        <li>Edit anytime</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SHARE YOUR CARD -->
+<section class="band sec">
+  <div class="wrap" style="padding-top:88px;padding-bottom:88px">
+    <div class="eyebrow">Share your card</div>
+    <div class="share-grid">
+      <div class="share-copy">
+        <h2>Simple ways to share your info.</h2>
+        <p>Share by QR code, AirDrop, or messaging. Most phones read your QR code with their built-in camera app, so the people you exchange cards with don&rsquo;t need Fonym to receive your card.</p>
+        <p class="aside">Of course, they might decide they want a Fonym too.</p>
+        <div class="tip">
+          <div class="eyebrow">Pro tip</div>
+          <p>Especially convenient at conferences and trade shows &mdash; the QR code carries your details itself, so it works even when the hall&rsquo;s Wi-Fi doesn&rsquo;t.</p>
         </div>
-        <div style="background:#E9E4D6;padding:22px 22px 24px">
-          <div style="font-size:20px;font-weight:600;color:#051E24">Conferences and expos</div>
-          <p style="margin:9px 0 0;font-size:16px;line-height:1.5;color:#3C4A4D">Sixty cards and a dead network. Scan at the booth, note the conversation, sort it out later.</p>
-        </div>
-        <div style="background:#E9E4D6;padding:22px 22px 24px">
-          <div style="font-size:20px;font-weight:600;color:#051E24">Agents and brokers</div>
-          <p style="margin:9px 0 0;font-size:16px;line-height:1.5;color:#3C4A4D">Inspectors, stagers, lenders, title reps. Tag the vendor bench once, find the right one from the driveway.</p>
-        </div>
-        <div style="background:#E9E4D6;padding:22px 22px 24px">
-          <div style="font-size:20px;font-weight:600;color:#051E24">Mobile services</div>
-          <p style="margin:9px 0 0;font-size:16px;line-height:1.5;color:#3C4A4D">Salons, cleaning, catering, detailing. Out of paper cards? Your QR is the card.</p>
-        </div>
-        <div style="background:#E9E4D6;padding:22px 22px 24px">
-          <div style="font-size:20px;font-weight:600;color:#051E24">Running a household</div>
-          <p style="margin:9px 0 0;font-size:16px;line-height:1.5;color:#3C4A4D">A deliberate place for the businesses and services you deal with, kept apart from friends and family.</p>
-        </div>
+      </div>
+      <div class="share-shot">
+        <picture>
+          <source srcset="web/share-phone.webp" type="image/webp">
+          <img class="share-phone" src="web/share-phone.png" width="560" height="1157" loading="lazy" alt="Fonym's Share screen: your active card above a QR code that carries the whole contact, with Share as file, Hide QR code, Brightness and Share as plain text buttons">
+        </picture>
       </div>
     </div>
   </div>
+</section>
 
-  <div style="max-width:1120px;margin:96px auto 0;padding:0 24px">
-    <div style="background:#0E6B76;color:#F3EFE3;padding:clamp(32px,5vw,56px)">
-      <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:32px">
-        <div style="min-width:0">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.2em;color:rgba(243,239,227,.7)">ONE PAYMENT</div>
-          <div style="margin-top:14px;font-size:clamp(46px,7vw,82px);font-weight:800;letter-spacing:-.045em;line-height:.94">Pay once.</div>
-          <div style="margin-top:10px;font-size:clamp(22px,3vw,34px);font-weight:300;letter-spacing:-.02em">Not a month. Not a year.</div>
-        </div>
-        <div style="min-width:0;max-width:30em">
-          <p style="margin:0;font-size:17.5px;line-height:1.55;color:rgba(243,239,227,.92);text-wrap:pretty">What you install is the complete app. No subscription, no ads, no account, no in-app purchases, and no feature waiting behind a second payment &mdash; and the features you bought will never move behind a new paywall later.</p>
-          <a href="https://apps.apple.com/us/app/fonym-business-card-scanner/id6809056277" style="display:inline-flex;margin-top:24px;border-bottom:none"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us" alt="Download Fonym on the App Store" style="display:block;height:40px;width:auto"></a>
-        </div>
+<!-- ============================================================ PRIVACY -->
+<section class="wrap sec">
+  <div class="rule-top">
+    <div class="eyebrow">Privacy</div>
+    <div class="priv-grid">
+      <div class="priv-copy">
+        <h2 class="h2" style="margin-bottom:22px">Your contacts are yours.</h2>
+        <p>Fonym was designed with privacy in mind. Your contacts, attachments, notes, and other information stay on your device. <strong>Nothing leaves your phone unless you choose to share it or back it up.</strong></p>
+        <p>You can create password-protected backups and store them wherever you choose.</p>
+        <p>And the people you exchange cards with never hear from us. No invitations, no follow-up emails, no marketing messages. They get your contact details, and that is it.</p>
+        <p>Fonym developers do not run servers. We&rsquo;re here to make the app that you enjoy using &mdash; and we&rsquo;re proud to carry Apple&rsquo;s <b>&ldquo;Data Not Collected&rdquo;</b> label.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <div style="max-width:1120px;margin:96px auto 0;padding:0 24px">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.2em;color:#0E6B76">EVERYTHING IN THE APP</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:4px 44px;margin-top:20px">
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Store unlimited cards, six ways in</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Review and correct every field before it saves</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Capture the back of a card into the same contact</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Keep the card photo alongside the details</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Phone, mobile, WhatsApp, email, website and address</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">LinkedIn, Instagram, Facebook, TikTok and X</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Your own notes on any contact</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Tags, favorites, and filtering by either</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Search every field; sort four ways</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Call, text or email anyone in a tap</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Share your card by QR, AirDrop or any messaging app</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Lock the app with Face ID or Touch ID</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">Password-encrypted backup file, kept where you choose</div>
-      <div style="padding:13px 0;border-bottom:1px solid #D9D3C4;font-size:17px;line-height:1.45;color:#3C4A4D">English, Spanish, Portuguese, German, French, Italian</div>
+<!-- ============================================================ PAY ONCE -->
+<section class="wrap sec">
+  <div class="pay">
+    <div style="min-width:0">
+      <div class="eyebrow">One payment</div>
+      <div class="pay-big">Pay once.<br><span>Enjoy Fonym.</span></div>
+      <div class="pay-nos">No subscription. No ads. No in-app purchases. No hidden paywall.</div>
+    </div>
+    <div class="pay-body">
+      <p>Buy Fonym once and get instant access to all the features without being asked to pay again later.</p>
+      <a class="badge" href="https://apps.apple.com/us/app/fonym-business-card-scanner/id6809056277"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us" alt="Download Fonym on the App Store" width="120" height="40"></a>
     </div>
   </div>
+</section>
 
-  <div style="background:#051E24;color:#F3EFE3;margin-top:104px">
-    <div style="max-width:1120px;margin:0 auto;padding:72px 24px">
-      <div style="font-size:clamp(28px,4.4vw,52px);font-weight:700;letter-spacing:-.035em;line-height:1.04;max-width:20em;text-wrap:balance">Your business contacts. Anywhere. Anytime.</div>
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:34px">
-        <a href="https://apps.apple.com/us/app/fonym-business-card-scanner/id6809056277" style="display:inline-flex;border-bottom:none"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us" alt="Download Fonym on the App Store" style="display:block;height:40px;width:auto"></a>
-        <div style="font-size:17px;font-weight:400;color:rgba(243,239,227,.72)">One payment. No subscription.</div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:56px;padding-top:26px;border-top:1px solid rgba(243,239,227,.18);font-size:15.5px;color:rgba(243,239,227,.62)">
-        <a href="https://fonymapp.github.io/support/index.html" style="color:#5AD0C8">Support</a>
-        <a href="https://fonymapp.github.io/privacy/index.html" style="color:#5AD0C8">Privacy policy</a>
-        <a href="mailto:fonym.dev@gmail.com" style="color:#5AD0C8">fonym.dev@gmail.com</a>
-        <span style="margin-left:auto">&copy; 2026 Fonym</span>
+<!-- ============================================================ FEATURES -->
+<section class="wrap sec">
+  <div class="eyebrow">Features</div>
+  <ul class="features">
+    <li>Unlimited business cards</li>
+    <li>Scan cards and QR codes, or add from photos, screenshots, vCards and copied text</li>
+    <li>Custom tags and notes</li>
+    <li>Share by QR code, AirDrop, or messaging</li>
+    <li>Create your own digital business card</li>
+    <li>Works without an internet connection</li>
+    <li>Optional Face ID or Touch ID protection</li>
+    <li>Available in 6 languages: English, Spanish, Brazilian Portuguese, German, French, and Italian</li>
+    <li>No ads</li>
+    <li>No subscriptions</li>
+    <li>No in-app purchases</li>
+  </ul>
+</section>
+
+</main>
+
+<!-- ============================================================ CLOSING -->
+<footer class="band closing sec">
+  <div class="wrap">
+    <h2>Business contacts belong somewhere better.</h2>
+    <div class="closing-lines">
+      <p>You have your family and friends&rsquo; contact info saved in your phone address book.</p>
+      <p class="they">Fonym is the place for you to save the business information on the go, while you are meeting that person, and have it handy anytime, anywhere, always with you.</p>
+      <div class="they-row">
+        <a class="badge" href="https://apps.apple.com/us/app/fonym-business-card-scanner/id6809056277"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us" alt="Download Fonym on the App Store" width="120" height="40"></a>
       </div>
     </div>
+    <div class="foot">
+      <a href="https://fonymapp.github.io/support/index.html">Support</a>
+      <a href="https://fonymapp.github.io/privacy/index.html">Privacy policy</a>
+      <a href="mailto:fonym.dev@gmail.com">Contact us</a>
+      <span class="copy">&copy; 2026 Fonym</span>
+    </div>
   </div>
+</footer>
 
-</div>
+<script>
+/* Rolls profession titles through the thought bubble, typed and erased like a
+   search box placeholder. Static ("plumber") without JS or with reduced motion. */
+(function () {
+  var el = document.getElementById("roll");
+  if (!el) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var words = ["plumber", "electrician", "contractor", "mechanic", "dentist", "hairdresser",
+               "pet groomer", "caterer", "real estate agent", "body shop", "cleaner", "vendor"];
+  var i = 0, text = words[0], deleting = true;
+  function tick() {
+    var target = words[i];
+    if (deleting) {
+      text = text.slice(0, -1);
+      el.textContent = text;
+      if (!text) { deleting = false; i = (i + 1) % words.length; return setTimeout(tick, 260); }
+      return setTimeout(tick, 38);
+    }
+    target = words[i];
+    text = target.slice(0, text.length + 1);
+    el.textContent = text;
+    if (text === target) { deleting = true; return setTimeout(tick, 1900); }
+    setTimeout(tick, 70 + Math.random() * 50);
+  }
+  setTimeout(tick, 1900);
+})();
+</script>
 </body>
 </html>
